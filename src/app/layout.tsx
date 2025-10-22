@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import BaseLayout from '@/ui/layout/base-layout'
 
 export const metadata: Metadata = {
   title: { template: '%s | Tic Tac Toe', default: 'Tic Tac Toe' },
@@ -12,9 +13,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
-    <html lang='pt-br'>
-      <body>{children}</body>
-    </html>
-  )
+  return <BaseLayout>{children}</BaseLayout>
 }

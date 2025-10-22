@@ -35,6 +35,11 @@ a {
   text-decoration: none;
 }
 
+main {
+  height: 100vh;
+  padding: 0.5rem 1rem;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
