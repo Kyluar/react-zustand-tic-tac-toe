@@ -1,0 +1,12 @@
+.square {
+  all: unset;
+  width: 5rem;
+  height: 5rem;
+  background-color: var(--bs-dark);
+  color: var(--bs-light);
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: -8px 8px 21px -4px rgba(66, 68, 90, 1);
+  -webkit-box-shadow: -8px 8px 21px -4px rgba(66, 68, 90, 1);
+  -moz-box-shadow: -8px 8px 21px -4px rgba(66, 68, 90, 1);
+}
