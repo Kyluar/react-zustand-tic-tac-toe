@@ -5,5 +5,5 @@ export const metadata: Metadata = {
 }
 
 export default function InitialPage() {
-  return <div>Initial Page</div>
+  return <div className='text-bg-light'>Initial Page</div>
 }
