@@ -1,10 +1,13 @@
 import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
+import { GameStore, GameState } from '@/lib/types/store'
 
-const useGameStore = create(
-  combine({ squares: Array(9).fill(null) }, (set) => {
+const initialState: GameState = { squares: Array(9).fill(null) }
+
+const useGameStore = create<GameStore>(
+  combine(initialState, (set) => {
     return {
-      setSquares: (nextSquares: any) => {
+      setSquares: (nextSquares) => {
         set((state) => ({
           squares:
             typeof nextSquares === 'function'

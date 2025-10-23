@@ -20,7 +20,7 @@ export default function Board() {
       {squares.map((square, idx) => (
         <Square
           key={idx}
-          value={square}
+          value={square ?? ''}
           onSquareClick={() => handleClick(idx)}
         />
       ))}
