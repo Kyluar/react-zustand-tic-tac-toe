@@ -3,21 +3,20 @@
 import styles from './board.module.css'
 import Square from './modules/square/Square'
 import { useGameStore } from '@/lib/store'
+import { useMemo } from 'react'
 
 export default function Board() {
-  const xIsNext = useGameStore((state) => state.xIsNext)
-  const setXIsNext = useGameStore((state) => state.setXIsNext)
   const squares = useGameStore((state) => state.squares)
-  const setSquares = useGameStore((state) => state.setSquares)
-  const player = xIsNext ? 'X' : 'O'
-
-  function handleClick(i: number) {
-    if (squares[i]) return
-    const nextSquares = squares.slice()
-    nextSquares[i] = player
-    setSquares(nextSquares)
-    setXIsNext(!xIsNext)
-  }
+  const makeMove = useGameStore((state) => state.makeMove)
+  const updateStatus = useGameStore((state) => state.updateStatus)
+  const handleClick = useMemo(
+    () => (i: number) => {
+      console.log('Recalculated...')
+      makeMove(i)
+      updateStatus()
+    },
+    [makeMove, updateStatus],
+  )
 
   return (
     <div className={styles.board}>
