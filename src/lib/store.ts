@@ -10,6 +10,7 @@ import {
 
 const initialState: GameState = {
   squares: Array(9).fill(null),
+  history: Array(1).fill(Array(9).fill(null)),
   player: 'X',
   status: 'START',
 }
@@ -31,13 +32,18 @@ const useGameStore = create<GameStore>(
 
       makeMove: (i) =>
         set((state) => {
-          const nextPlayer = state.player === 'O' ? 'X' : 'O'
           const squaresCopy = state.squares.slice()
           if (squaresCopy[i] || state.status === 'END') return {}
+
+          const nextPlayer = state.player === 'O' ? 'X' : 'O'
+          const history = state.history
+
           squaresCopy[i] = state.player
+
           return {
             squares: squaresCopy,
             player: nextPlayer,
+            history: history.concat([squaresCopy]),
           }
         }),
 

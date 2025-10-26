@@ -8,14 +8,16 @@ export type GameState = {
   status: GameStatus
   squares: Squares
   player: Player
+  history: Squares[]
 }
 
 export type SetAction<T> = T | ((previusValue: T) => T)
+export type MakeMove = (squareIndex: number) => void
 
 type GameActions = {
   setSquares: (nextSquares: SetAction<GameState['squares']>) => void
   setPlayer: (nextPlayer: SetAction<GameState['player']>) => void
-  makeMove: (squareIndex: number) => void
+  makeMove: MakeMove
   updateStatus: () => void
 }
 
