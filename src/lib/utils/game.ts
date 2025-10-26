@@ -52,6 +52,12 @@ export function calculateStatus(
   else return 'ONGOING'
 }
 
-export function calculatePlayer(xIsNext: GameState['xIsNext']): Player {
+export function calculateXIsNext(
+  currentMove: GameState['currentMove'],
+): boolean {
+  return currentMove % 2 === 0
+}
+
+export function calculatePlayer(xIsNext: boolean): Player {
   return xIsNext ? 'X' : 'O'
 }

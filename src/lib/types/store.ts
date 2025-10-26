@@ -7,7 +7,6 @@ export type Squares = SquareValue[]
 export type GameState = {
   status: GameStatus
   squares: Squares
-  xIsNext: boolean
   history: Squares[]
   currentMove: number
 }
@@ -18,8 +17,8 @@ export type BackHistory = (squareIndex: number) => void
 
 export type GameActions = {
   setSquares: (nextSquares: SetAction<GameState['squares']>) => void
-  setXIsNext: (nextXIsNext: SetAction<GameState['xIsNext']>) => void
   setCurrentMove: (nextCurrentMove: SetAction<GameState['currentMove']>) => void
+  getXIsNext: () => boolean
   makeMove: MakeMove
   updateStatus: () => void
   backHistory: BackHistory

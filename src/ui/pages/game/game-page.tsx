@@ -10,7 +10,7 @@ import { calculatePlayer } from '@/lib/utils/game'
 export default function GamePage() {
   const status = useGameStore((state) => state.status)
   const squares = useGameStore((state) => state.squares)
-  const xIsNext = useGameStore((state) => state.xIsNext)
+  const xIsNext = useGameStore((state) => state.getXIsNext())
   const history = useGameStore((state) => state.history)
 
   const makeMove = useGameStore((state) => state.makeMove)
