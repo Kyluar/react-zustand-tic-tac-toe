@@ -1,20 +1,16 @@
 'use client'
 
-import { GameStatus, Player } from '@/lib/types/store'
+import { GameState, Player } from '@/lib/types/store'
 
 type StatusProps = {
-  status: GameStatus
+  status: GameState['status']
   player: Player
 }
 
-export default function Status({ status, player }: StatusProps) {
-  const panel = {
-    status,
-    player,
-  }
+export default function Status(props: StatusProps) {
   return (
     <div className='d-flex align-self-start gap-5'>
-      {Object.entries(panel).map(([k, v], idx) => (
+      {Object.entries(props).map(([k, v], idx) => (
         <span key={k + idx} className='text-capitalize'>
           <b>{k}: </b> {v}
         </span>

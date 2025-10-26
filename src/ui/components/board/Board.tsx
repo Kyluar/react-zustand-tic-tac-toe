@@ -1,12 +1,12 @@
 'use client'
 
-import { Squares, MakeMove } from '@/lib/types/store'
+import { GameState, GameActions } from '@/lib/types/store'
 import styles from './board.module.css'
 import Square from './modules/square/Square'
 
 type BoardProps = {
-  squares: Squares
-  handleOnSquareClick: MakeMove
+  squares: GameState['squares']
+  handleOnSquareClick: GameActions['makeMove']
 }
 
 export default function Board({ squares, handleOnSquareClick }: BoardProps) {

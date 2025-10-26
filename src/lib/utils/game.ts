@@ -1,4 +1,10 @@
-import { Squares, Player, SetAction, GameStatus } from '@/lib/types/store'
+import {
+  Squares,
+  Player,
+  SetAction,
+  GameStatus,
+  GameState,
+} from '@/lib/types/store'
 
 function isUpdateFunction<T>(
   action: SetAction<T>,
@@ -44,4 +50,8 @@ export function calculateStatus(
   else if (!winner && !turns) return 'DRAW'
   else if (winner) return 'END'
   else return 'ONGOING'
+}
+
+export function calculatePlayer(xIsNext: GameState['xIsNext']): Player {
+  return xIsNext ? 'X' : 'O'
 }

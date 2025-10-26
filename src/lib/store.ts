@@ -1,7 +1,8 @@
 import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
-import { GameStore, GameState } from '@/lib/types/store'
+import { GameStore, GameState, Player } from '@/lib/types/store'
 import {
+  calculatePlayer,
   calculateStatus,
   calculateTurns,
   calculateWinner,
@@ -11,7 +12,8 @@ import {
 const initialState: GameState = {
   squares: Array(9).fill(null),
   history: Array(1).fill(Array(9).fill(null)),
-  player: 'X',
+  currentMove: 0,
+  xIsNext: true,
   status: 'START',
 }
 
@@ -24,32 +26,49 @@ const useGameStore = create<GameStore>(
         }))
       },
 
-      setPlayer: (nextPlayer) => {
+      setXIsNext: (nextXIsNext) => {
         set((state) => ({
-          player: storeSetState(state.player, nextPlayer),
+          xIsNext: storeSetState(state.xIsNext, nextXIsNext),
+        }))
+      },
+
+      setCurrentMove: (nextCurrentMove) => {
+        set((state) => ({
+          currentMove: storeSetState(state.currentMove, nextCurrentMove),
         }))
       },
 
       makeMove: (i) =>
         set((state) => {
-          const squaresCopy = state.squares.slice()
-          if (squaresCopy[i] || state.status === 'END') return {}
+          const nextSquares = state.squares.slice()
+          if (nextSquares[i] || state.status === 'END') return {}
 
-          const nextPlayer = state.player === 'O' ? 'X' : 'O'
-          const history = state.history
+          const player = calculatePlayer(state.xIsNext)
+          const nextHistory = state.history
+            .slice(0, state.currentMove + 1)
+            .concat([nextSquares])
 
-          squaresCopy[i] = state.player
+          const nextCurrentMove = nextHistory.length - 1
+
+          nextSquares[i] = player
 
           return {
-            squares: squaresCopy,
-            player: nextPlayer,
-            history: history.concat([squaresCopy]),
+            squares: nextSquares,
+            xIsNext: !state.xIsNext,
+            history: nextHistory,
+            currentMove: nextCurrentMove,
           }
         }),
 
+      backHistory: (i) => {
+        set((state) => {
+          const nextSquares = state.history[i]
+          return { squares: nextSquares, currentMove: i, xIsNext: i % 2 === 0 }
+        })
+      },
+
       updateStatus: () =>
         set((state) => {
-          if (state.status === 'END') return {}
           const winner = calculateWinner(state.squares)
           const turns = calculateTurns(state.squares)
           const nextStatus = calculateStatus(winner, turns)
