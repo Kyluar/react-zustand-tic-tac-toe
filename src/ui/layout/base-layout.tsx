@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { GameStoreProvider } from '@/lib/providers/game-store-provider'
+
 export default function BaseLayout({
   children,
 }: {
@@ -8,7 +10,9 @@ export default function BaseLayout({
   return (
     <html lang='pt-br'>
       <body>
-        <main>{children}</main>
+        <GameStoreProvider>
+          <main>{children}</main>
+        </GameStoreProvider>
       </body>
     </html>
   )

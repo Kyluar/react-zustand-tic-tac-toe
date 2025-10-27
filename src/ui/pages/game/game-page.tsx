@@ -4,20 +4,21 @@ import Status from '@/ui/components/status/Status'
 import Board from '@/ui/components/board/Board'
 import History from '@/ui/components/history/History'
 
-import { useGameStore } from '@/lib/store'
+import { useGameStore } from '@/lib/providers/game-store-provider'
 import { calculatePlayer } from '@/lib/utils/game'
 
 export default function GamePage() {
-  const status = useGameStore((state) => state.status)
-  const squares = useGameStore((state) => state.squares)
-  const xIsNext = useGameStore((state) => state.getXIsNext())
-  const history = useGameStore((state) => state.history)
+  const {
+    status,
+    squares,
+    history,
+    makeMove,
+    updateStatus,
+    backHistory,
+    getXIsNext,
+  } = useGameStore((state) => state)
 
-  const makeMove = useGameStore((state) => state.makeMove)
-  const updateStatus = useGameStore((state) => state.updateStatus)
-  const backTime = useGameStore((state) => state.backHistory)
-
-  const player = calculatePlayer(xIsNext)
+  const player = calculatePlayer(getXIsNext())
 
   const handleClick = (i: number) => {
     makeMove(i)
@@ -25,7 +26,7 @@ export default function GamePage() {
   }
 
   const handleBackTime = (i: number) => {
-    backTime(i)
+    backHistory(i)
     updateStatus()
   }
 

@@ -1,3 +1,5 @@
+import { StoreApi } from 'zustand'
+
 export type GameStatus = 'START' | 'ONGOING' | 'DRAW' | 'END'
 export type Player = 'X' | 'O'
 type SquareValue = Player | null
@@ -25,3 +27,5 @@ export type GameActions = {
 }
 
 export type GameStore = GameState & GameActions
+
+export type GameStoreApi = StoreApi<GameStore>
