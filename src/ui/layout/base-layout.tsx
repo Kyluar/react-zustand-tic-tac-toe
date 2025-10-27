@@ -8,7 +8,7 @@ export default function BaseLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang='pt-br'>
+    <html lang='pt-br' data-bs-theme='light'>
       <body>
         <GameStoreProvider>
           <main>{children}</main>

@@ -1,6 +1,7 @@
 'use client'
 
 import styles from './square.module.css'
+import Button from 'react-bootstrap/Button'
 
 type SquareProps = {
   value: string
@@ -9,8 +10,13 @@ type SquareProps = {
 
 export default function Square({ value, onSquareClick }: SquareProps) {
   return (
-    <button type='button' className={styles.square} onClick={onSquareClick}>
-      <span>{value}</span>
-    </button>
+    <Button
+      type='button'
+      variant='dark'
+      onClick={onSquareClick}
+      className={styles.square}
+    >
+      {value}
+    </Button>
   )
 }

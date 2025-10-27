@@ -34,7 +34,11 @@ export default function GamePage() {
     <div className='d-flex flex-column justify-content-center align-items-center h-100'>
       <Status player={player} status={status} />
       <Board squares={squares} handleOnSquareClick={handleClick} />
-      <History history={history} handleOnClick={handleBackTime} />
+      <History
+        history={history}
+        handleOnClick={handleBackTime}
+        className='position-absolute top-0 end-0 mt-3 me-3'
+      />
     </div>
   )
 }
